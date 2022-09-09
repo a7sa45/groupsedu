@@ -1,13 +1,16 @@
 #from crypt import methods
 import email
 from email.policy import default
+import numbers
 from tokenize import group
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, flash, render_template, request, redirect, url_for, Response
 from werkzeug.exceptions import HTTPException
 from flask_sqlalchemy import SQLAlchemy
 #from flask_admin import Admin, AdminIndexView
 #from flask_admin.contrib.sqla import ModelView
 from webargs import flaskparser, fields
+from webargs.flaskparser import use_args, use_kwargs, parser, abort
+import gladiator as gl
 from flask_basicauth import BasicAuth
 from datetime import datetime
 from os import environ
@@ -85,9 +88,20 @@ def delete_group(group_id):
 def not_found(e):
     return render_template("404.html")
 
-#@app.before_first_request
-#def create_tables():
-#    db.create_all()
+
+# assigning validations
+field_validations = (
+    ('email', gl.required, gl.format_email),
+    ('universityid', gl.required),
+    ('subject', gl.required),
+    ('code', gl.required),
+    ('university', gl.required),
+    ('section', gl.required),
+    ('url', gl.required),
+)
+
+
+
 
 @app.route('/')
 def index():
@@ -109,7 +123,26 @@ def add():
 @app.route('/add', methods=["POST", "GET"])
 def adds():
     if request.method == "POST":
-        create_group(request.form['email'], request.form['universityid'], request.form['subject'], request.form['code'], request.form['university'], request.form['section'], request.form['url'])
+        # input test data
+        valid_data = {
+            'email': request.form['email'],
+            'universityid': request.form['universityid'],
+            'subject': request.form['subject'],
+            'code': request.form['code'],
+            'university': request.form['university'],
+            'section': request.form['section'],
+            'url': request.form['url']
+        }
+        result = gl.validate(field_validations, valid_data)
+        print("Is data valid ? : " + str(bool(result)))
+        print(result)
+        if result:
+            create_group(request.form['email'], request.form['universityid'], request.form['subject'], request.form['code'], request.form['university'], request.form['section'], request.form['url'])
+            flash('تم اضافة القروب')
+        else:
+            return redirect(url_for('add'))
+            
+        
     return redirect(url_for('index'))
 
 @app.route('/delete/<group_id>', methods=["POST", "GET"])
