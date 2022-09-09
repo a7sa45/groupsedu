@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<style>
+    #myInput {
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+  text-align: center; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: #f1f1f1;
+}
+</style>
+<br><br>
+<div class="card text-center">
+    <div class="card-body">
+      <h3 class="card-title" style="color: #f4b41a;">قروبات الجامعة</h3>
+      <p class="card-text">الهدف هو تسهيل عملية البحث لمساعدة الطالب في الحصول على المعلومة.</p>
+      <a href="" style="background-color: #334155;" class="btn text-white m-1"><i class="fa-solid fa-users-rectangle"></i> قروبات المقررات</a>
+      <a href="" style="background-color: #334155;" class="btn text-white m-1"><i class="fa-solid fa-people-group"></i> قروبات عامة</a>
+      <br>
+      <a href="/add" style="background-color: #f4b41a; width: 285px;" class="btn text-white m-1"><i class="fa-solid fa-plus"></i> إضافة قروب</a>
+    </div>
+</div>
+    <br><br><br>
+<div class="card" style="border-radius: 6px;">
+    <table class="table table-hover" id="myTable">
+        <thead style="background-color: #f9fafb;">
+            <div class="col-sm-12 mb-3 mt-3">
+                <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" onkeyup="myFunction()" placeholder="ابحث برقم الشعبة...">
+            </div>
+          <tr class="header">
+            <th scope="col">المادة</th>
+            <th scope="col">الشعبة</th>
+            <th scope="col">القسم</th>
+            <th scope="col">الجامعة</th>
+          </tr>
+        </thead>
+        <tbody id="myItems">
+        {% for group in groups %}
+          <tr onclick="window.location='{{group.url}}';">
+            <th scope="row">{{group.subject}}</th>
+            <td>{{group.code}}</td>
+            <td>{{group.section}}</td>
+            <td>{{group.university}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, th, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
+{% endblock %}
