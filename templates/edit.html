@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<br><br>
+<div class="card text-center">
+    <div class="card-body">
+      <h3 class="card-title" style="color: #f4b41a;">تعديل قروب</h3>
+      <p class="card-text">صفحة تعديل القروب المنشور</p>
+      <br>
+      <form action="/update" method="post">
+        <div class="form-row">
+            <input type="hidden" name="group_id" value="{{group.id}}">
+          <div class="form-group col-md-6">
+            <label for="email">ايميلك</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{group.email}}" placeholder="ايميلك الجامعي*">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">رقمك الجامعي</label>
+            <input type="number" class="form-control" id="universityid" name="universityid" value="{{group.universityid}}" placeholder="نحتاج رقمك الجامعي لتوثيق القروب*">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="subject">اسم المادة</label>
+            <input type="text" class="form-control" id="subject" name="subject" value="{{group.subject}}" placeholder="اسم مختصر*">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">رقم الشعبة</label>
+            <input type="number" class="form-control" id="code" name="code" value="{{group.code}}" placeholder="نستخدمة في البحث*">
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="university">رمز الجامعة</label>
+              <input type="text" class="form-control" id="university" name="university" value="{{group.university}}" placeholder="رمز مختصر مثال (KKU)*">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="section">رمز القسم</label>
+              <input type="text" class="form-control" id="section" name="section" value="{{group.section}}" placeholder="رمز مختصر مثال (CS)*">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="url">رابط القروب</label>
+            <input type="url" class="form-control" id="url" name="url" value="{{group.url}}" placeholder="رابط القروب (واتساب , تلجرام, الخ..)*">
+          </div>
+        <button type="submit" style="background-color: #334155; " class="btn text-white m-1"><i class="fa-solid fa-pencil"></i> تحديث </button>
+      </form>
+        
+    </div>
+</div>
+    <br><br><br>
+
+
+{% endblock %}

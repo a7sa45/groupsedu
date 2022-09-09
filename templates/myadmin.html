@@ -38,8 +38,8 @@
 <br><br>
 <div class="card text-center">
     <div class="card-body">
-      <h3 class="card-title" style="color: #f4b41a;">قروبات الجامعة</h3>
-      <p class="card-text">الهدف هو تسهيل عملية البحث لمساعدة الطالب في الحصول على المعلومة.</p>
+      <h3 class="card-title" style="color: #f4b41a;">صفحة الادارة</h3>
+      <p class="card-text">ادارة الموقع</p>
       <a href="" style="background-color: #334155;" class="btn text-white m-1"><i class="fa-solid fa-users-rectangle"></i> قروبات المقررات</a>
       <a href="" style="background-color: #334155;" class="btn text-white m-1"><i class="fa-solid fa-people-group"></i> قروبات عامة</a>
       <br>
@@ -48,17 +48,17 @@
 </div>
     <br><br><br>
 <div class="card" style="border-radius: 6px;">
-    <table class="table table-hover" id="myTable" style="margin-bottom: 0;">
+    <table class="table table-hover" id="myTable">
         <thead style="background-color: #f9fafb;">
             <div class="col-sm-12 mb-3 mt-3">
                 <input type="text" id="myInput" onkeyup="myFunction()" class="form-control" onkeyup="myFunction()" placeholder="ابحث برقم الشعبة...">
             </div>
-            <span class="badge badge-warning">للانضمام في القروب انقر في اي مكان من معلومات القروب *</span>
           <tr class="header">
             <th scope="col">المادة</th>
             <th scope="col">الشعبة</th>
             <th scope="col">القسم</th>
             <th scope="col">الجامعة</th>
+            <th scope="col">إدارة</th>
           </tr>
         </thead>
         <tbody id="myItems">
@@ -68,11 +68,13 @@
             <td>{{group.code}}</td>
             <td style="color: #3254dc;">{{group.section}}</td>
             <td style="color: #22c5a2;">{{group.university}}</td>
+            <td><a style="color: black;" href="edit/{{group.id}}"><i class="fa-solid fa-pencil"></i></a>
+                 | 
+                <a style="color: black;" href="delete/{{group.id}}"><i class="fa-solid fa-trash-can"></i></a></td>
           </tr>
         {% endfor %}
         </tbody>
     </table>
-    <span class="badge badge-warning text-white" style="background-color: #111827;">&copy; جميع الحقوق محفوضة</span>
 </div>
 <br><br>
 <script>
