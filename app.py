@@ -6,6 +6,7 @@ from tokenize import group
 from flask import Flask, flash, render_template, request, redirect, url_for, Response
 from werkzeug.exceptions import HTTPException
 from flask_sqlalchemy import SQLAlchemy
+from flask_mysqldb import MySQL
 #from flask_admin import Admin, AdminIndexView
 #from flask_admin.contrib.sqla import ModelView
 from webargs import flaskparser, fields
@@ -19,9 +20,10 @@ import os
 
 
 app = Flask(__name__)
-dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(dir, "groupsedu.db"))
-app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+#dir = os.path.dirname(os.path.abspath(__file__))
+#database_file = "sqlite:///{}".format(os.path.join(dir, "groupsedu.db"))
+#app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/flask'
 app.config["SECRET_KEY"] = 'secret'
 db = SQLAlchemy(app)
 
@@ -32,10 +34,12 @@ app.config['BASIC_AUTH_PASSWORD'] = 'Groups://a7sa45.com'
 basic_auth = BasicAuth(app)
 app.config['ADMIN_CREDENTIALS'] = ('a7sa45', 'Groups://a7sa45.com')
 
-#app.debug =True
-
-
-
+#MySQL
+#app.config['MYSQL_HOST'] = 'localhost'
+#app.config['MYSQL_USER'] = 'root'
+#app.config['MYSQL_PASSWORD'] = ''
+#app.config['MYSQL_DB'] = 'flask'
+#mysql = MySQL(app)
 
 #Model
 class Group(db.Model):

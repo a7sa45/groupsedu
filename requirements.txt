@@ -4,6 +4,7 @@ Flask==2.2.2
 Flask-Admin==1.6.0
 Flask-BasicAuth==0.2.0
 Flask-Gladiator==0.1
+Flask-MySQLdb==1.0.1
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.1
 Gladiator==0.7.0
@@ -12,8 +13,10 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.1
 marshmallow==3.17.1
+mysqlclient==2.1.1
 packaging==21.3
 psycopg2==2.9.3
+PyMySQL==1.0.2
 pyparsing==3.0.9
 SQLAlchemy==1.4.41
 webargs==8.2.0
