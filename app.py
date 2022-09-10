@@ -28,9 +28,9 @@ db = SQLAlchemy(app)
 
 
 app.config['BASIC_AUTH_USERNAME'] = 'a7sa45'
-app.config['BASIC_AUTH_PASSWORD'] = 'Gen://Aa123098.com'
+app.config['BASIC_AUTH_PASSWORD'] = 'Groups://a7sa45.com'
 basic_auth = BasicAuth(app)
-app.config['ADMIN_CREDENTIALS'] = ('a7sa45', 'Gen://Aa123098.com')
+app.config['ADMIN_CREDENTIALS'] = ('a7sa45', 'Groups://a7sa45.com')
 
 #app.debug =True
 
