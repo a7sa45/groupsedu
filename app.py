@@ -6,6 +6,7 @@ from tokenize import group
 from flask import Flask, flash, render_template, request, redirect, url_for, Response
 from werkzeug.exceptions import HTTPException
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from flask_mysqldb import MySQL
 #from flask_admin import Admin, AdminIndexView
 #from flask_admin.contrib.sqla import ModelView
@@ -81,8 +82,9 @@ def update_group(group_id, email, universityid, subject, code, university, secti
     db.session.commit()
 
 def read():
-    return db.session.query(Group).all()
-
+    #return db.session.query(Group).all()
+    #الامر يجيب البيانات حسب الاحدث
+    return db.session.query(Group).order_by(Group.id.desc()).all()
 def delete_group(group_id):
     db.session.query(Group).filter_by(id=group_id).delete()
     db.session.commit()
